@@ -8,8 +8,18 @@ const app = express();
 
 // app middleware
 app.use(cors());
-app.use(bodyParser.json({type: 'application/json'}));
+app.use(bodyParser.json({
+  type: 'application/json'
+}));
 app.disable('etag');
+
+app.use('/', (req, res) => {
+  res.json({
+    status: 'Success',
+    message: 'API is up and running',
+    code: 200
+  }).status(200);
+});
 
 app.use('/todos', routes());
 
@@ -24,7 +34,7 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-errorHandler.setHandler('ValidationError', function validationHandler (err, stack) {
+errorHandler.setHandler('ValidationError', function validationHandler(err, stack) {
   const res = {};
   res.status = 'Error';
   res.message = `Schema Validation Error: ${err.message}`;

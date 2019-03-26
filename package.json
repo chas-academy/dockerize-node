@@ -8,7 +8,7 @@
   },
   "scripts": {
     "clean": "rm -rf build && mkdir build",
-    "build-server": "babel src --out-dir build -s --ignore src/__tests__/**",
+    "build-server": "babel ./src --out-dir build -s --ignore src/__tests__/**",
     "build": "npm run clean && npm run build-server",
     "prestart": "npm run build && npm run migrate",
     "start": "node ./build/index.js",
